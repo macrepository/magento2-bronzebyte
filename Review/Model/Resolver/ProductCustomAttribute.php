@@ -58,10 +58,16 @@ class ProductCustomAttribute implements ResolverInterface
         /** @var Product $product */
         $product = $value['model'];
 
+        $attrFilter = $args['filter'] ?? [];
+
         $attributeSetId = $product->getAttributeSetId();
         $attributes = $this->attributeCollectionFactory->create()
             ->setAttributeSetFilter($attributeSetId)
             ->addVisibleFilter();
+
+        if (!empty($attrFilter)) {
+            $attributes->addFieldToFilter('attribute_code', ['in' => $attrFilter]);
+        }
 
         $customAttributes = [];
 
