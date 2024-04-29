@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Review\Model\ResourceModel\Review" type="BronzeByte\Review\Model\ResourceModel\Review" />
+    <preference for="Magento\Review\Model\ResourceModel\Review\Collection" type="BronzeByte\Review\Model\ResourceModel\Review\Collection" />
+    <preference for="Magento\Review\Model\ResourceModel\Review\Product\Collection" type="BronzeByte\Review\Model\ResourceModel\Review\Product\Collection" />
+    <preference for="Magento\ReviewGraphQl\Model\Resolver\CreateProductReview" type="BronzeByte\Review\Model\Resolver\CreateProductReview" />
+  
+</config>

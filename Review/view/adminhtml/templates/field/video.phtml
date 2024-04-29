@@ -1,0 +1,29 @@
+<?php
+/**
+ * Author: Shem L. Macapobres
+ *
+ * @file: video.phtml
+ * @description: Product review video module and graphql
+ */
+
+/**
+ * Access helper methods
+ */
+$videoUploader = $this->helper('BronzeByte\Review\Helper\VideoUploader');
+?>
+
+<div>
+    <div class="admin__field-control control">
+        <input id="<?= $block->getFieldId() ?>" name="<?= $block->getFieldId() ?>" value="" type="file">
+    </div>
+    <div>
+        <span><strong>Supported Video Format:</strong> mp4, avi, mov, wmv, flv, mkv, webm</span>
+    </div>
+    <div style="margin-top: 10px;">
+        <?php if ($block->getReviewId() && $videoUrl = $videoUploader->getVideoUrl($block->getVideoPath())) : ?>
+            <video controls src="<?= $videoUrl ?>">
+                Your browser doesn't support videos
+            </video>
+        <?php endif; ?>
+    </div>
+</div>

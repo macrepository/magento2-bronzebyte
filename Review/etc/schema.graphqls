@@ -1,0 +1,28 @@
+type ProductReview {
+    video: String @doc(description: "A custom video url of a product review.") @resolver(class: "BronzeByte\\Review\\Model\\Resolver\\ReviewVideo")
+}
+
+type SimpleProduct {
+    custom_attributes(filter: [String]): [ProductCustomAttribute!]! @doc(description: "An array of all product custom attribute witl label, code, and value") @resolver(class: "BronzeByte\\Review\\Model\\Resolver\\ProductCustomAttribute")
+    rating_breakdown: ProductRatingBreakDown! @doc(description: "Overall product ratings breakdown") @resolver(class: "BronzeByte\\Review\\Model\\Resolver\\ProductRatingBreakDown")
+}
+
+type ProductCustomAttribute @doc(description: "Contains data about a single aspect of a custom product attributes.") {
+    label: String! @doc(description: "The label of a product custom attribute")
+    code: String! @doc(description: "The code of a product custom attribute")
+    value: String @doc(description: "The value of a product custom attribute")
+}
+
+type ProductRatingBreakDown @doc(description: "Contains items for overall product ratings") {
+    items: [ProductRatingBreakDownItems!]! @doc(description: "Contains an item for overall product ratings")
+}
+
+type ProductRatingBreakDownItems @doc(description: "Contains an item for overall product ratings") {
+    name: String! @doc(description: "The ratings name")
+    value: Float @doc(description: "The average value of overall ratings")
+    rating_count: Int! @doc(description: "The total rating count")
+}
+
+input CreateProductReviewInput @doc(description: "Defines a new product review.") {
+    video: String! @doc(description:"The  base64 code format's file")
+}
