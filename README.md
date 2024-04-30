@@ -2,7 +2,7 @@
 
 ### Custom review upload in magento admin
 
-    It can add/edit review video in the magento admin review page
+It can add/edit review video in the magento admin review page
 
 ### Custom GraphQL
 
