@@ -80,6 +80,11 @@ class ProductCustomAttribute implements ResolverInterface
                 continue;
             }
 
+            // Check if attribute is a select or multiselect
+            if (in_array($attribute->getFrontendInput(), ['select', 'multiselect'])) {
+                $attributeValue = $this->getOptionText($attribute, $attributeValue);
+            }
+
             $customAttributes[] = [
                 'code' => $attributeCode,
                 'label' => $attributeLabel,
@@ -88,5 +93,31 @@ class ProductCustomAttribute implements ResolverInterface
         }
 
         return $customAttributes;
+    }
+
+    /**
+     * Retrieve the option text based on option ids value(s)
+     * @param Magento\Catalog\Model\ResourceModel\Eav\Attribute $attribute
+     * @param mixed $value
+     * @return string
+     */
+    private function getOptionText($attribute, $value)
+    {
+        if ($value === null || $value === '') {
+            return $value;
+        }
+
+        if ($attribute->getFrontendInput() === 'multiselect') {
+            $values = explode(',', $value);
+            $results = [];
+
+            foreach ($values as $item) {
+                $results[] = $attribute->getSource()->getOptionText($item);
+            }
+
+            return implode(', ', $results);
+        } else {
+            return $attribute->getSource()->getOptionText($value);
+        }
     }
 }
