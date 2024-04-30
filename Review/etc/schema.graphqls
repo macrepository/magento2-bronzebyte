@@ -2,9 +2,13 @@ type ProductReview {
     video: String @doc(description: "A custom video url of a product review.") @resolver(class: "BronzeByte\\Review\\Model\\Resolver\\ReviewVideo")
 }
 
-type SimpleProduct {
+interface ProductInterface {
     custom_attributes(filter: [String]): [ProductCustomAttribute!]! @doc(description: "An array of all product custom attribute witl label, code, and value") @resolver(class: "BronzeByte\\Review\\Model\\Resolver\\ProductCustomAttribute")
     rating_breakdown: ProductRatingBreakDown! @doc(description: "Overall product ratings breakdown") @resolver(class: "BronzeByte\\Review\\Model\\Resolver\\ProductRatingBreakDown")
+    reviews_video(
+        pageSize: Int = 20 @doc(description: "The maximum number of results to return at once. The default is 20."),
+        currentPage: Int = 1 @doc(description: "The page of results to return. The default is 1."),
+    ): ProductReviews! @doc(description: "The list of products reviews with having video.") @resolver(class: "BronzeByte\\Review\\Model\\Resolver\\Product\\Reviews")
 }
 
 type ProductCustomAttribute @doc(description: "Contains data about a single aspect of a custom product attributes.") {

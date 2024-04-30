@@ -183,18 +183,20 @@ class VideoUploader extends \Magento\Framework\App\Helper\AbstractHelper
      * Get Video Full Path URL
      *
      * @param string $filePath
+     * @param boolean $strict - If strict, this will return null if video is not found in the media storage
      * @return string|null
      */
-    public function getVideoUrl($filePath)
+    public function getVideoUrl($filePath, $strict = false)
     {
-        $videoUrl = null;
         $videoFullPath = $this->getVideoPath($filePath);
 
-        if ($this->isVideoPathExist($videoFullPath)) {
-            $store = $this->_storeManager->getStore();
-            $mediaUrl = $store->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
-            $videoUrl = $mediaUrl . str_replace('//', '/', self::REVIEW_VIDEO_DIR . $filePath);
+        if ($strict && !$this->isVideoPathExist($videoFullPath)) {
+            return null;
         }
+
+        $store = $this->_storeManager->getStore();
+        $mediaUrl = $store->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+        $videoUrl = $mediaUrl . str_replace('//', '/', self::REVIEW_VIDEO_DIR . $filePath);
 
         return $videoUrl;
     }
