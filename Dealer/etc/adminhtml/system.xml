@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="bronzebytedealer" translate="label" sortOrder="200">
+            <label>BronzeByte/Dealer</label>
+        </tab>
+        <section id="defaultgroup" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Default Group</label>
+            <tab>bronzebytedealer</tab>
+            <resource>BronzeByte_Dealer::config_defaultgroup</resource>
+            <group id="customergroup" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>List all customer group</label>
+                <field id="selectedgroup" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Select Customer Group</label>
+                    <source_model>BronzeByte\Dealer\Model\Config\Source\CustomerGroup</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
